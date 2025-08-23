@@ -18,7 +18,6 @@ public class Product {
     @Id
     private int prodId;
 
-
     @Override
     public String toString() {
         return "Product{" +
