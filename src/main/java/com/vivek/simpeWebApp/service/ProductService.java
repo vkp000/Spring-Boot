@@ -1,6 +1,8 @@
 package com.vivek.simpeWebApp.service;
 
 import com.vivek.simpeWebApp.model.Product;
+import com.vivek.simpeWebApp.repository.ProductRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,40 +12,36 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    List<Product> products = new ArrayList<>(Arrays.asList(
-            new Product(101, "Iphone", 50000),
-            new Product(102, "Iq T1 Pro", 18278),
-            new Product(103, "Lava 1 Pro", 18278)
-    ));
+    @Autowired
+    ProductRepo repo;
+
+//    List<Product> products = new ArrayList<>(Arrays.asList(
+//            new Product(101, "Iphone", 50000),
+//            new Product(102, "Iq T1 Pro", 18278),
+//            new Product(103, "Lava 1 Pro", 18278)
+//    ));
 
 
     public List<Product> getProducts(){
 
-        return products;
+        return repo.findAll();
     }
 
     public Product getProductById(int prodId){
-        return products.stream()
-                .filter(p-> p.getProdId() == prodId)
-                .findFirst().get();
+        return repo.findById(prodId).orElse(new Product());
     }
 
     public void addProduct(Product prod){
-        products.add(prod);
+        repo.save(prod);
     }
 
     public void updateProduct(Product prod){
-        int index= 0;
+        repo.save(prod);
+    }
 
-        for(int i=0; i<products.size(); i++) {
-            if (products.get(i).getProdId() == prod.getProdId()) {
-                index = i;
-            }
 
-        }
-
-        products.set(index,prod);
-
+    public void deleteProduct(int prodId) {
+        repo.deleteById(prodId);
     }
 
 
