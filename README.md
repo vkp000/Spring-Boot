@@ -1,5 +1,5 @@
 
-# Spring Boot Simple Web App
+# Spring Boot Web App
 
 A simple Spring Boot web application with **H2 in-memory database** integration.
 
